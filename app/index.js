@@ -1,62 +1,28 @@
-// var React = require('react');
-// var ReactDOM = require('react-dom');
-
-// var HelloWorld = React.createClass({
-//   render: function() {
-//     return (
-//       <div> Hello World </div>
-//     )
-//   }
-// });
-
-// ReactDOM.render(
-//   <HelloWorld />,
-//   document.getElementById('app')
-// );
-
-var USER_DATA = {
-  name: 'Wung S',
-  username: 'wung-s',
-  image: 'https://avatars1.githubusercontent.com/u/5159585?v=3&s=466'
-}
-
 var React = require('react');
 var ReactDOM = require('react-dom');
+var routes = require('./config/routes');
+var Raven = require('raven-js');
 
-var ProfilePic = React.createClass({
-  render: function () {
-    return <img src={this.props.imageUrl} style={{height: 100, width: 100}}></img>
+var sentryKey = '315e6d134647442fbbe411c47cf806f5';
+var sentryApp = '100106';
+var sentryURL = 'https://' + sentryApp + '@sentry.io/' + sentryKey;
+
+var _APP_INFO = {
+  name: 'GitHub Battle',
+  branch: '4',
+  version: '1.0'
+}
+
+Raven.config(sentryURL, {
+  release: _APP_INFO.version,
+  tags: {
+    branch: _APP_INFO.branch
   }
-});
+}).install();
 
-var ProfileLink = React.createClass({
-  render: function () {
-    return (
-      <div>
-        <a href={'https://www.github.com/' +  this.props.username}>
-          {this.props.username}
-        </a>
-      </div>
-    );
-  }
-});
+console.log(this.loalal.again);
 
-var ProfileName = React.createClass({
-  render: function (){
-    return <div>{this.props.name}</div>
-  }
-});
-
-var Avatar = React.createClass({
-  render: function () {
-    return(
-      <div>
-        <ProfilePic imageUrl={this.props.user.image}/>
-        <ProfileName name={this.props.user.name}/>
-        <ProfileLink username={this.props.user.username}/>
-      </div>
-    );
-  }
-});
-
-ReactDOM.render(<Avatar user={USER_DATA} />, document.getElementById('app'));
+ReactDOM.render(
+  routes,
+  document.getElementById('app')
+);
