@@ -20,7 +20,6 @@ Raven.config(sentryURL, {
   }
 }).install();
 
-console.log(this.loalal.again);
 
 ReactDOM.render(
   routes,
