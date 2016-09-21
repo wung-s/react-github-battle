@@ -10,7 +10,7 @@ var ConfirmBattleContainer = React.createClass({
     console.log('getInitialState');
     return {
       isLoading: true,
-      playerInfo: []
+      playersInfo: []
     }
   },
   componentWillMount: function() {
@@ -24,7 +24,7 @@ var ConfirmBattleContainer = React.createClass({
         console.log('PLAYERS: ', players);
         this.setState({
           isLoading: false,
-          playerInfo: [players[0], players[1]]
+          playersInfo: [players[0], players[1]]
         })
       }.bind(this));
     //fetch info from github and update state
@@ -35,11 +35,20 @@ var ConfirmBattleContainer = React.createClass({
   componentWillUnmount: function() {
     console.log('componentWillUnmount');
   },
+  handleInitiateBattle: function() {
+    this.context.router.push({
+      pathname: '/results',
+      state: {
+        playersInfo: this.state.playersInfo
+      }
+    })
+  },
   render: function() {
     return (
       <ConfirmBattle
         isLoading = {this.state.isLoading}
-        playerInfo = {this.state.playerInfo}
+        playersInfo = {this.state.playersInfo}
+        onInitiateBattle = {this.handleInitiateBattle}
       />
     )
   }
