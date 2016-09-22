@@ -4,6 +4,7 @@ var Link = require('react-router').Link;
 var styles = require('../styles');
 var UserDetails = require('./UserDetails');
 var UserDetailsWrapper = require('./UserDetailsWrapper');
+var Loading = require('./Loading');
 
 
 function puke(obj) {
