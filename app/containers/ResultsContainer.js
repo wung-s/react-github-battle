@@ -1,6 +1,10 @@
-var React = require('react');
-var Results = require('../components/Results');
-var githubHelpers = require('../utils/githubHelpers');
+// var React = require('react');
+// var Results = require('../components/Results');
+// var githubHelpers = require('../utils/githubHelpers');
+
+import React from 'react';
+import Results from '../components/Results';
+import githubHelpers from '../utils/githubHelpers';
 
 var ResultsContainer = React.createClass({
   getInitialState: function() {
@@ -31,4 +35,5 @@ var ResultsContainer = React.createClass({
   }
 });
 
-module.exports = ResultsContainer;
+// module.exports = ResultsContainer;
+export default ResultsContainer;

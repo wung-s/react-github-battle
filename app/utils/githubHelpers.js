@@ -1,4 +1,5 @@
-var axios = require('axios');
+// var axios = require('axios');
+import axios from 'axios';
 
 // var param = '?client_id=' + id + '&client_secret=' + sec ;
 
@@ -60,4 +61,6 @@ var helpers = {
   }
 }
 
-module.exports = helpers;
+// module.exports = helpers;
+
+export default helpers;

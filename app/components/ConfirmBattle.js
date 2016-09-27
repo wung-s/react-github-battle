@@ -1,10 +1,17 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
-var Link = require('react-router').Link;
-var styles = require('../styles');
-var UserDetails = require('./UserDetails');
-var UserDetailsWrapper = require('./UserDetailsWrapper');
-var Loading = require('./Loading');
+// var React = require('react');
+// var PropTypes = React.PropTypes;
+// var Link = require('react-router').Link;
+// var styles = require('../styles');
+// var UserDetails = require('./UserDetails');
+// var UserDetailsWrapper = require('./UserDetailsWrapper');
+// var Loading = require('./Loading');
+
+import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
+import styles from '../styles';
+import UserDetails from './UserDetails';
+import UserDetailsWrapper from './UserDetailsWrapper';
+import Loading from './Loading';
 
 
 function puke(obj) {
@@ -14,7 +21,7 @@ function puke(obj) {
 function ConfirmBattle(props) {
   return (
     props.isLoading === true
-    ? <Loading speed='800' text='One Moment'/>
+    ? <Loading speed={800} text='One Moment'/>
     : <div className="jumbotron col-sm-12 text-center" style={styles.transparentBg}>
         <h1>Confirm Players</h1>
         <div className='col-sm-8 col-sm-offset-2'>
@@ -46,4 +53,5 @@ ConfirmBattle.propTypes = {
   onInitiateBattle: PropTypes.func.isRequired
 }
 
-module.exports = ConfirmBattle;
+// module.exports = ConfirmBattle;
+export default ConfirmBattle;

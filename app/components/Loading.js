@@ -1,5 +1,7 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
+// var React = require('react');
+// var PropTypes = React.PropTypes;
+
+import React, { PropTypes } from 'react';
 
 var styles = {
   container: {
@@ -64,4 +66,5 @@ var Loading = React.createClass({
   }
 })
 
-module.exports = Loading;
+// module.exports = Loading;
+export default Loading;
