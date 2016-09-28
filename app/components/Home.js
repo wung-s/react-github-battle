@@ -1,9 +1,3 @@
-// var React = require('react');
-// var ReactRouter = require('react-router');
-// var Link = ReactRouter.Link
-// var transparentBg = require('../styles').transparentBg;
-// var MainContainer = require('./MainContainer');
-
 import React from 'react';
 import ReactRouter, { Link } from 'react-router';
 import MainContainer from './MainContainer';
@@ -21,5 +15,5 @@ function Home () {
   )
 }
 
-// module.exports = Home;
+
 export default Home

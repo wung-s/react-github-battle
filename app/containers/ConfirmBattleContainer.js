@@ -1,61 +1,63 @@
-// var React = require('react');
-// var ConfirmBattle = require('../components/ConfirmBattle');
-// var githubHelpers = require('../utils/githubHelpers');
-
-import React from 'react';
+import React, { Component } from 'react';
 import ConfirmBattle from '../components/ConfirmBattle';
-import githubHelpers from '../utils/githubHelpers';
+import { getPlayersInfo } from '../utils/githubHelpers'
 
-var ConfirmBattleContainer = React.createClass({
-  contextTypes: {
-    router: React.PropTypes.object.isRequired
-  },
-  getInitialState: function() {
-    console.log('getInitialState');
-    return {
+class ConfirmBattleContainer extends Component{
+
+  constructor () {
+    super()
+    this.state = {
       isLoading: true,
-      playersInfo: []
+      playersInfo: [],
     }
-  },
-  componentWillMount: function() {
+  }
+
+  async componentWillMount() {
     console.log('componentWillMount');
-  },
-  componentDidMount: function() {
-    var query = this.props.location.query;
-    console.log('componentDidMount ===', this);
-    githubHelpers.getPlayersInfo([query.playerOne, query.playerTwo])
-      .then(function(players) {
-        console.log('PLAYERS: ', players);
-        this.setState({
-          isLoading: false,
-          playersInfo: [ players[0], players[1] ]
-        })
-      }.bind(this));
+  }
+
+  async componentDidMount() {
+    const { query }  = this.props.location;
+    try {
+      const players = await getPlayersInfo([query.playerOne, query.playerTwo])
+      this.setState({
+        isLoading: false,
+        playersInfo: [ players[0], players[1] ]
+      })
+
+    } catch(error) {
+      console.warn('Error in ConfirmBattleContainer', error);
+    }
+
     //fetch info from github and update state
-  },
-  componentWillReceiveProps: function() {
+  }
+  componentWillReceiveProps() {
     console.log('componentWillReceiveProps');
-  },
-  componentWillUnmount: function() {
+  }
+  componentWillUnmount() {
     console.log('componentWillUnmount');
-  },
-  handleInitiateBattle: function() {
+  }
+  handleInitiateBattle() {
     this.context.router.push({
       pathname: '/results',
       state: {
         playersInfo: this.state.playersInfo
       }
     })
-  },
-  render: function() {
+  }
+  render() {
     return (
       <ConfirmBattle
         isLoading = {this.state.isLoading}
         playersInfo = {this.state.playersInfo}
-        onInitiateBattle = {this.handleInitiateBattle}
+        onInitiateBattle = {() => this.handleInitiateBattle()}
       />
     )
   }
-});
+}
+
+ConfirmBattleContainer.contextTypes = {
+  router: React.PropTypes.object.isRequired
+}
 
 export default ConfirmBattleContainer;

@@ -1,26 +1,20 @@
-// var React = require('react');
-
-// import { transparentBg } from '../style/index';
-// var Prompt = require('../components/Prompt');
-
-import React from 'react';
+import React, { Component } from 'react';
 import Prompt from '../components/Prompt';
 
-var PromptContainer = React.createClass({
-  contextTypes: {
-    router: React.PropTypes.object.isRequired
-  },
-  getInitialState: function() {
-    return {
+class PromptContainer extends  Component {
+  constructor() {
+    super();
+    this.state = {
         username: ''
     }
-  },
-  handleUpdateUser: function(e) {
+  }
+  handleUpdateUser(e) {
     this.setState({
       username: e.target.value
     })
-  },
-  handleSubmitUser: function(e) {
+  }
+
+  handleSubmitUser(e) {
     e.preventDefault();
     var username = this.state.username;
     this.setState({
@@ -28,33 +22,35 @@ var PromptContainer = React.createClass({
     });
 
     console.log(this);
-
-    if(this.props.routeParams.playerOne) {
+    const { playerOne } = this.props.routeParams;
+    if(playerOne) {
       this.context.router.push({
         pathname: '/battle',
         query: {
-          playerOne: this.props.routeParams.playerOne,
+          playerOne,
           playerTwo: this.state.username
         }
       })
     } else {
-      this.context.router.push('/playerTwo/' + this.state.username);
-      // this.context.router.push('/playerTwo');
-
+      this.context.router.push(`/playerTwo/${username}`);
     }
-  },
-  render: function() {
+  }
+
+  render() {
     console.log(this);
     return (
       <Prompt
-        onSubmitUser = {this.handleSubmitUser}
-        onUpdateUser = {this.handleUpdateUser}
+        onSubmitUser = {(event) => this.handleSubmitUser(event)}
+        onUpdateUser = {(event) => this.handleUpdateUser(event)}
         header = {this.props.route.header}
         username = {this.state.username}
       />
     )
   }
-});
+}
 
-// module.exports = PromptContainer;
+PromptContainer.contextTypes = {
+  router: React.PropTypes.object.isRequired
+}
+
 export default PromptContainer;
